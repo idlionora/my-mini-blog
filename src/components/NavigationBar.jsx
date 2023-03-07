@@ -9,10 +9,10 @@ const NavigationBar = ({page}) => {
 			{/* <div className="w-full max-w-screen-xl h-11 bg-pink-100 absolute opacity-30" /> */}
 			<div className="w-full max-w-screen-xl h-full flex justify-between items-center">
 				<div className="flex items-center">
-					<div className="h-11 w-11 bg-button-green rounded-full" />
+					<div className="h-11 w-11 bg-button-green rounded-full shrink-0" />
                     <p className="pl-2">Welcome, {username}!</p>
 				</div>
-                <ul className="flex flex-col items-end sm:flex-row md:items-center">
+                <ul className="flex flex-col items-end sm:flex-row md:items-center whitespace-nowrap">
                     {(page !== "home")? <li className="ml-4" onClick={()=>navigate("/")}>Home</li> : ""}
                     <li className="ml-4" >About</li>
                     {page !== "edit" && page !== "blogPost"? <li className="ml-4">Manage Posts</li> : ""}

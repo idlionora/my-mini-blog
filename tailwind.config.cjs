@@ -9,7 +9,7 @@ module.exports = {
 				'theme-blue': '#aac4ff',
 				'theme-purple': '#b1b2ff',
 				'button-green': '#b3ffae',
-				'button-red': 'ff7d7d',
+				'button-red': '#ff7d7d',
 			},
 		},
 		fontFamily: {
