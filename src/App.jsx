@@ -1,9 +1,12 @@
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+
 function App() {
-
-  return (
-    <div className="w-screen h-screen bg-red-300"></div>
-
-  )
+	return (
+		<Routes>
+			<Route path="/" element={<Home />} />
+		</Routes>
+	);
 }
 
-export default App
+export default App;
