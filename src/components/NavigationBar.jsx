@@ -57,7 +57,7 @@ const NavigationBar = ({page}) => {
 					)}
 				</ul>
 				<div
-					className="absolute left-0 bottom-0 w-full max-w-[12rem] bg-white border border-violet-400 rounded-lg overflow-hidden transition-all duration-300 ease-in-out z-10"
+					className="absolute left-0 bottom-0 w-full max-w-[12rem] bg-white border-x border-b border-violet-400 rounded-b-lg overflow-hidden transition-all duration-300 ease-in-out z-10"
 					style={isDropdown ? { transform: 'translateY(100%' } : null}
 				>
 					{isLoggedin ? (
@@ -78,7 +78,7 @@ const NavigationBar = ({page}) => {
 					) : (
 						<button
 							className="block px-4 py-1 w-full hover:bg-neutral-00 active:bg-indigo-100"
-							disabled={!isDropdown}
+							disabled={!isDropdown} onClick={() => navigate('/login')}
 						>
 							Login
 						</button>
