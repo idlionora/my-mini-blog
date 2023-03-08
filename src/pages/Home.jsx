@@ -10,7 +10,7 @@ function Home() {
 					Welcome To My&nbsp;Blog
 				</h1>
 				<div className="w-full max-w-screen-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-7">
-                    {/* Will run data.map here later on*/}
+                    {/* Will map data here later on*/}
 					<BlogCard title="Testing Long Title Here To See If The Card Stretch"/>
 					<BlogCard />
 					<BlogCard />

@@ -13,10 +13,10 @@ const BlogCard = ({page, id, title = 'Title will be shown here', thumbnailPath =
 					<p className="px-4 py-3 font-semibold">{title}</p>
                     {page === 'edit' && <div className='absolute bg-pink-400 h-full w-full grid grid-cols-2'>
                         <div className='h-full bg-button-green flex justify-center items-center'>
-                            <img className="h-7" src={iconPencil} alt="edit post" />
+                            <img className="h-6" src={iconPencil} alt="edit post" />
                         </div>
                         <div className='h-full bg-button-red flex justify-center items-center'>
-                            <img className="h-7 opacity-90" src={iconTrashbin} alt="delete post" />
+                            <img className="h-6 opacity-90" src={iconTrashbin} alt="delete post" />
                         </div>
                     </div>}
 				</div>
