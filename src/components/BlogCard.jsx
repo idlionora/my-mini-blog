@@ -4,12 +4,14 @@ import thumbDefault from '../assets/thumbnail example1.png';
 import iconPencil from '../assets/noun-pencil-1051456.png';
 import iconTrashbin from '../assets/noun-trash-123755.png';
 
-const BlogCard = ({
-	page,
-	id = 999,
-	title = 'Title will be shown here',
-	thumbnailPath = thumbDefault,
-}) => {
+const BlogCard = (props) => {
+	const {
+		page,
+		id = 999,
+		title = 'Title will be shown here',
+		thumbnailPath = thumbDefault,
+	} = props;
+	
 	const navigate = useNavigate();
 	const [isShown, setIsShown] = useState(false);
 
@@ -31,7 +33,10 @@ const BlogCard = ({
 					/>
 				</div>
 				<div className="grow min-h-[3.7rem] flex flex-col justify-center text-center items-center">
-					<p className="mx-4 my-3 w-fit font-semibold cursor-pointer" onClick={() => navigate(`/post/${id}`)}>
+					<p
+						className="mx-4 my-3 w-fit font-semibold cursor-pointer"
+						onClick={() => navigate(`/post/${id}`)}
+					>
 						{title}
 					</p>
 				</div>

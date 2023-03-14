@@ -11,7 +11,7 @@ function BlogPost() {
 	const { id } = useParams();
 	const [bannerImg, setBannerImg] = useState(bannerDefault);
 	return (
-		<div className="w-full min-h-screen bg-neutral-00 flex flex-col items-center">
+		<div className="w-full min-h-screen bg-neutral-00 flex flex-col items-center overflow-hidden">
 			<NavigationBar page="blogPost" />
 			<section className="w-full max-w-[82.5rem] bg-white h-40 sm:h-48 md:h-52 lg:h-56 flex">
 				<img
@@ -37,7 +37,7 @@ function BlogPost() {
 					<div className="w-full md:pl-3 lg:pl-4">
 						{/* this is placeholder content */}
 						<h1 className="font-heading font-bold text-2xl mb-3">
-							Random Number Generator
+							Random Number Generator {id}
 						</h1>
 						<p>
 							Various imaginative ways of collecting this entropic information have
@@ -86,11 +86,11 @@ function BlogPost() {
 						Explore Other Post
 					</h3>
 					<div className="w-full h-[0.2rem] bg-theme-purple mb-3" />
-					<div className="w-full grid sm:grid-cols-2 md:grid-cols-1 gap-2">
-						<ExploreCard />
-						<ExploreCard />
-						<ExploreCard />
-						<ExploreCard />
+					<div className="w-full grid sm:grid-cols-2 md:grid-cols-1 gap-2 justify-items-center">
+						<ExploreCard id='995'/>
+						<ExploreCard id='996'/>
+						<ExploreCard id='997'/>
+						<ExploreCard id='998'/>
 					</div>
 				</div>
 			</section>
