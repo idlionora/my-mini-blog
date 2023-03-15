@@ -43,7 +43,7 @@ const BlogCard = (props) => {
 				{/* checking isShown intended to make top layer responsive for touchscreen devices */}
 				{page === 'edit' && (
 					<div
-						className="absolute w-full h-full rounded-xl overflow-hidden flex flex-col opacity-0 transition-opacity"
+						className="absolute w-full max-w-sm h-full rounded-xl overflow-hidden flex flex-col opacity-0 transition-opacity"
 						onClick={(e) => {
 							e.stopPropagation();
 							clickTopLayer();

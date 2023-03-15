@@ -4,9 +4,9 @@ function Login() {
         
     }
     return (
-		<div className="bg-theme-blue sm:bg-neutral-00 w-full h-screen flex justify-center items-center sm:px-5">
-			<section className="bg-theme-blue h-fit w-full max-w-[25rem] mb-24 p-7 sm:drop-shadow-[7px_7px_0_#4267b2]">
-				<h1 className="text-white text-5xl sm:text-6xl font-bold font-heading mb-5 mt-2">
+		<div className="bg-theme-blue sm:bg-neutral-00 w-full h-full min-h-screen flex justify-center items-center sm:px-5">
+			<section className="bg-theme-blue h-fit w-full max-w-[25rem] mb-24 sm:mb-10 p-7 sm:drop-shadow-[7px_7px_0_#4267b2] sm:relative sm:translate-x-[-1px]">
+				<h1 className="text-white text-5xl sm:text-6xl font-bold font-heading mb-4 mt-2">
 					Login
 				</h1>
 				<form className="w-full" onSubmit={(e) => submitForm(e)}>
@@ -20,8 +20,9 @@ function Login() {
 						id="email"
 						type="email"
 						name="email"
-						className="w-full rounded-lg h-12 px-3 sm:px-4 text-lg tracking-wider mb-4"
+						className="w-full rounded-lg h-12 px-3 sm:px-4 text-lg tracking-wider mb-4 focus:outline-blue-800"
 						placeholder="Your email"
+						required
 					/>
 					<label
 						htmlFor="password"
@@ -33,8 +34,9 @@ function Login() {
 						id="password"
 						type="password"
 						name="password"
-						className="w-full rounded-lg h-12 px-3 sm:px-4 text-lg tracking-wider mb-5"
+						className="w-full rounded-lg h-12 px-3 sm:px-4 text-lg tracking-wider mb-5 focus:outline-blue-800"
 						placeholder="Your password"
+						required
 					/>
 					<div className="flex gap-6 justify-between mb-4">
 						<button
