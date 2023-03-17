@@ -13,9 +13,9 @@ function BlogPost() {
 	return (
 		<div className="w-full min-h-screen bg-neutral-00 flex flex-col items-center overflow-hidden">
 			<NavigationBar page="blogPost" />
-			<section className="w-full max-w-[82.5rem] bg-white h-40 sm:h-48 md:h-52 lg:h-56 flex">
+			<section className="w-full max-w-[82.5rem] bg-white h-40 sm:h-48 md:h-52 lg:h-56">
 				<img
-					className="w-full object-cover object-center"
+					className="w-full h-full object-cover object-center"
 					src={bannerImg}
 					alt="Post's Banner"
 				/>

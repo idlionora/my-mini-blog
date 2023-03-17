@@ -23,11 +23,11 @@ const BlogCard = (props) => {
 		<div className="w-full flex justify-center relative">
 			<div className="w-full max-w-sm bg-theme-purple rounded-xl overflow-hidden flex flex-col">
 				<div
-					className="bg-white w-full h-[45vw] max-h-[12.178rem] sm:h-44 md:h-40 lg:h-32 flex cursor-pointer"
+					className="bg-white w-full h-[45vw] max-h-[12.178rem] sm:h-44 md:h-40 lg:h-32 cursor-pointer"
 					onClick={() => navigate(`/post/${id}`)}
 				>
 					<img
-						className="w-full object-cover"
+						className="w-full h-full object-cover"
 						src={thumbnailPath}
 						alt={'thumbnail ' + id}
 					/>

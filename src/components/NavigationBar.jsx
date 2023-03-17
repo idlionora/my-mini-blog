@@ -1,33 +1,36 @@
-import iconChevron from "../assets/chevron-down.png";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import iconChevron from '../assets/chevron-down.png';
+import iconProfile from '../assets/noun-user-1256674-profile.png';
 
-const NavigationBar = ({page}) => {
-    const navigate = useNavigate();
-    const [isDropdown, setIsDropdown] = useState(false); 
-	const [userData, setUserData] = useState(null)
+const NavigationBar = ({ page }) => {
+	const navigate = useNavigate();
+	const [isDropdown, setIsDropdown] = useState(false);
+	const [userData, setUserData] = useState(null);
 
-	useEffect(() => { 
+	useEffect(() => {
 		if (!!localStorage.getItem('blog-user')) {
-			setUserData(JSON.parse(localStorage.getItem('blog-user')))			
+			setUserData(JSON.parse(localStorage.getItem('blog-user')));
 		}
-	}, [])
-	
+	}, []);
+
 	function logOut() {
 		localStorage.removeItem('blog-user');
-		setUserData(null)
+		setUserData(null);
 	}
-	
-    return (
+
+	return (
 		<nav className="w-screen h-14 bg-theme-purple px-4 sm:px-5 flex justify-center items-center relative">
 			<div className="w-full max-w-screen-xl h-full flex justify-between items-center relative">
 				<div className="flex items-center w-full h-full bg-theme-purple z-20">
-					<div className="h-11 w-11 bg-button-green rounded-full shrink-0" />
+					<div className="h-11 w-11 bg-white rounded-full shrink-0 overflow-hidden">
+						<img className="w-full h-full object-cover object-center" src={userData?.profilepic ? userData.profilepic : iconProfile} alt="" />
+					</div>
 					<div
 						className="pl-2 flex items-center cursor-pointer"
 						onClick={() => setIsDropdown(!isDropdown)}
 					>
-						<p className="mr-1">Welcome, {!!userData? userData.username : 'Guest'}!</p>
+						<p className="mr-1">Welcome, {userData ? userData.username : 'Guest'}!</p>
 						<img
 							className={`w-4 h-fit ${
 								isDropdown ? 'rotate-180' : ''
@@ -40,7 +43,7 @@ const NavigationBar = ({page}) => {
 				<ul className="h-full flex items-center whitespace-nowrap bg-theme-purple z-[21]">
 					{page !== 'home' ? (
 						<li
-							className="ml-4 cursor-pointer hover:underline active:underline decoration-1 underline-offset-4"
+							className="ml-3 sm:ml-4 cursor-pointer hover:underline active:underline decoration-1 underline-offset-4"
 							onClick={() => navigate('/')}
 						>
 							Home
@@ -48,13 +51,13 @@ const NavigationBar = ({page}) => {
 					) : (
 						''
 					)}
-					<li className="ml-4 cursor-pointer hover:underline active:underline decoration-1 underline-offset-4">
+					<li className="ml-3 sm:ml-4 cursor-pointer hover:underline active:underline decoration-1 underline-offset-4">
 						About
 					</li>
 					{page !== 'edit' && page !== 'blogPost' ? (
 						<li
-							className="ml-4 cursor-pointer hover:underline active:underline decoration-1 underline-offset-4"
-							onClick={()=>!!userData ? navigate('/edit') : navigate('/login')}
+							className="ml-3 sm:ml-4 cursor-pointer hover:underline active:underline decoration-1 underline-offset-4"
+							onClick={() => (!!userData ? navigate('/edit') : navigate('/login'))}
 						>
 							Manage Posts
 						</li>
@@ -76,7 +79,8 @@ const NavigationBar = ({page}) => {
 							</button>
 							<button
 								className="block px-4 py-1 w-full hover:bg-neutral-00 active:bg-indigo-100"
-								disabled={!isDropdown} onClick={logOut}
+								disabled={!isDropdown}
+								onClick={logOut}
 							>
 								Logout
 							</button>
@@ -84,7 +88,8 @@ const NavigationBar = ({page}) => {
 					) : (
 						<button
 							className="block px-4 py-1 w-full hover:bg-neutral-00 active:bg-indigo-100"
-							disabled={!isDropdown} onClick={() => navigate('/login')}
+							disabled={!isDropdown}
+							onClick={() => navigate('/login')}
 						>
 							Login
 						</button>
@@ -93,6 +98,6 @@ const NavigationBar = ({page}) => {
 			</div>
 		</nav>
 	);
-}
+};
 
-export default NavigationBar
+export default NavigationBar;
