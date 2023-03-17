@@ -5,21 +5,48 @@ import NavigationBar from '../components/NavigationBar';
 function AdminPage() {
 	const hiddenThumbInput = useRef();
 	const hiddenBannerInput = useRef();
-	const [screenOpacity, setScreenOpacity] = useState(true);
+	const [screenDisplay, setScreenDisplay] = useState(false);
+	const [screenOpacity, setScreenOpacity] = useState(false);
+	const [formDisplay, setFormDisplay] = useState(false);
+	const [formInPosition, setFormInPosition] = useState(false);
 
-	function toggleScreenOpacity() {
-		setScreenOpacity(!screenOpacity);
+	function handleModal() {
+		if (!formDisplay) {
+			setScreenDisplay(true);
+			setFormDisplay(true);
+			setTimeout(() => {
+				setScreenOpacity(true);
+				setFormInPosition(true);
+			}, 10);
+		} else {
+			setScreenOpacity(false);
+			setFormInPosition(false);
+			setTimeout(() => { setScreenDisplay(false) }, 210);
+			setTimeout(() => { setFormDisplay(false) }, 410);			
+		}
 	}
 
 	return (
 		<>
 			<div
 				className={`bg-black w-full h-full fixed z-50 transition-opacity duration-200 ${
-					screenOpacity ? 'opacity-60' : 'opacity-0'
-				}`}
+					screenDisplay ? 'block' : 'hidden'
+				} ${screenOpacity ? 'opacity-60' : 'opacity-0'}`}
+				onClick={handleModal}
 			/>
-			<div className="absolute z-[51] w-full h-full sm:px-4 md:px-5 sm:py-20 flex justify-center">
-				<div className="bg-neutral-00 w-full max-w-[39.5rem] md:max-w-[45rem] sm:rounded-2xl h-full sm:h-fit relative px-4 pt-14 sm:py-5 md:px-5 md:py-6">
+			<div
+				className={`absolute z-[51] w-full h-full sm:px-4 md:px-5 sm:py-20 flex justify-center ${
+					formDisplay ? 'block' : 'hidden'
+				} ${
+					formInPosition ? 'translate-y-0 opacity-100' : 'translate-y-[-10rem] opacity-0'
+				}`}
+				style={{ transition: 'opacity 320ms ease-in-out, transform 400ms ease-in-out' }}
+				onClick={handleModal}
+			>
+				<div
+					className="bg-neutral-00 w-full max-w-[39.5rem] md:max-w-[45rem] sm:rounded-2xl h-full sm:h-fit relative px-4 pt-14 sm:py-5 md:px-5 md:py-6"
+					onClick={(e) => e.stopPropagation()}
+				>
 					<form>
 						<input
 							type="text"
@@ -66,17 +93,20 @@ function AdminPage() {
 							rows="10"
 							className="w-full border border-slate-400 focus:outline-indigo-400 rounded-xl px-3 py-2 sm:px-4 sm:py-3 mb-2"
 							placeholder="Type your blog text post here. Post preview will be cut from your first 80 characters in here."
+							style={{ resize: 'vertical' }}
 						/>
 						<div className="flex justify-end gap-2">
 							<button
 								type="submit"
 								className="bg-button-green hover:bg-green-500 active:bg-green-500 hover:text-white active:text-white p-1 w-[5rem] font-semibold rounded-2xl border border-emerald-400"
+								onClick={handleModal}
 							>
 								Save
 							</button>
 							<button
 								type="button"
 								className="bg-button-red hover:bg-red-500 hover:text-white p-1 w-[5rem] font-semibold rounded-2xl border border-red-500"
+								onClick={handleModal}
 							>
 								Delete
 							</button>
@@ -89,7 +119,10 @@ function AdminPage() {
 				<NavigationBar page="edit"></NavigationBar>
 				<section className="w-full px-4 sm:mx-5 flex flex-col items-center">
 					<div className="w-full max-w-screen-xl">
-						<button className="font-heading font-bold text-[1.25rem] bg-theme-blue px-4 py-3 rounded-2xl text-neutral-100 mt-9 mb-7">
+						<button
+							className="font-heading font-bold text-[1.25rem] bg-theme-blue px-4 py-3 rounded-2xl text-neutral-100 mt-9 mb-7"
+							onClick={handleModal}
+						>
 							Create Blog +
 						</button>
 					</div>
@@ -98,16 +131,17 @@ function AdminPage() {
 						<BlogCard
 							page="edit"
 							title="Testing Long Title Here To See If The Card Stretch"
+							handleModal={handleModal}
 						/>
-						<BlogCard page="edit" />
-						<BlogCard page="edit" />
-						<BlogCard page="edit" />
-						<BlogCard page="edit" />
-						<BlogCard page="edit" />
-						<BlogCard page="edit" />
-						<BlogCard page="edit" />
-						<BlogCard page="edit" />
-						<BlogCard page="edit" />
+						<BlogCard page="edit" handleModal={handleModal} />
+						<BlogCard page="edit" handleModal={handleModal} />
+						<BlogCard page="edit" handleModal={handleModal} />
+						<BlogCard page="edit" handleModal={handleModal} />
+						<BlogCard page="edit" handleModal={handleModal} />
+						<BlogCard page="edit" handleModal={handleModal} />
+						<BlogCard page="edit" handleModal={handleModal} />
+						<BlogCard page="edit" handleModal={handleModal} />
+						<BlogCard page="edit" handleModal={handleModal} />
 					</div>
 				</section>
 			</div>

@@ -10,6 +10,7 @@ const BlogCard = (props) => {
 		id = 999,
 		title = 'Title will be shown here',
 		thumbnailPath = thumbDefault,
+		handleModal
 	} = props;
 	
 	const navigate = useNavigate();
@@ -56,8 +57,9 @@ const BlogCard = (props) => {
 							className="bg-black w-full opacity-40 h-[45vw] max-h-[12.178rem] sm:h-44 md:h-40 lg:h-32 flex"
 							onClick={() => (isShown ? navigate(`/post/${id}`) : null)}
 						/>
-						<div className="bg-pink-200 grow min-h-[3.7rem] justify-center text-center relative grid grid-cols-2">
-							<div className="h-full bg-button-green flex justify-center items-center">
+						<div className="bg-theme-purple grow min-h-[3.7rem] justify-center text-center relative grid grid-cols-2">
+							<div className="h-full bg-button-green flex justify-center items-center cursor-pointer"
+							onClick={handleModal}>
 								<img className="h-6" src={iconPencil} alt="edit post" />
 							</div>
 							<div className="h-full bg-button-red flex justify-center items-center">
