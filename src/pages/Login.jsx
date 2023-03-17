@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 function Login() {
 	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [submittedForm, setSubmittedForm] = useState({});
@@ -37,7 +38,7 @@ function Login() {
 		};
 
 		localStorage.setItem('blog-user', JSON.stringify(userData));
-		navigate(-1);				
+		searchParams.get('to') === 'edit' ? navigate('/edit'): navigate(-1);				
 	}
 
 	if (hasNotRegistered && email !== submittedForm.email) setHasNotRegitered(false);

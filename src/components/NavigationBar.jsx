@@ -57,7 +57,7 @@ const NavigationBar = ({ page }) => {
 					{page !== 'edit' && page !== 'blogPost' ? (
 						<li
 							className="ml-3 sm:ml-4 cursor-pointer hover:underline active:underline decoration-1 underline-offset-4"
-							onClick={() => (!!userData ? navigate('/edit') : navigate('/login'))}
+							onClick={() => (!!userData ? navigate('/edit') : navigate('/login?to=edit'))}
 						>
 							Manage Posts
 						</li>
