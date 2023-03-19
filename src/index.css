@@ -8,6 +8,10 @@
     font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
     font-weight: 400;
   }
+
+  .tox:not([dir=rtl]) {
+    border: 1px solid red
+  }
 }
 @tailwind components;
 @tailwind utilities;

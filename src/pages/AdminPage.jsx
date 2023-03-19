@@ -1,14 +1,17 @@
 import { useRef, useState } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
 import BlogCard from '../components/BlogCard';
 import NavigationBar from '../components/NavigationBar';
 
 function AdminPage() {
-	const hiddenThumbInput = useRef();
-	const hiddenBannerInput = useRef();
+	const hiddenThumbInput = useRef(null);
+	const hiddenBannerInput = useRef(null);
+	const editorRef = useRef(null);
 	const [screenDisplay, setScreenDisplay] = useState(false);
 	const [screenOpacity, setScreenOpacity] = useState(false);
 	const [formDisplay, setFormDisplay] = useState(false);
 	const [formInPosition, setFormInPosition] = useState(false);
+	const [isEditorFocus, setIsEditorFocus] = useState(false);
 
 	function handleModal() {
 		if (!formDisplay) {
@@ -22,8 +25,18 @@ function AdminPage() {
 			setScreenOpacity(false);
 			setFormInPosition(false);
 			setTimeout(() => { setScreenDisplay(false) }, 210);
-			setTimeout(() => { setFormDisplay(false) }, 410);			
+			setTimeout(() => { setFormDisplay(false) }, 410);
+			editorRef.current.setContent(
+				'<p>Type your blog text post here. Post preview will be cut from your first 80 characters in here.</p>'
+			);			
 		}
+	}
+
+	const submitForm = () => {
+		if (editorRef.current) {
+			console.log(editorRef.current.getContent());
+		}
+		handleModal();
 	}
 
 	return (
@@ -47,12 +60,17 @@ function AdminPage() {
 					className="bg-neutral-00 w-full max-w-[39.5rem] md:max-w-[45rem] sm:rounded-2xl h-full sm:h-fit relative px-4 pt-14 sm:py-5 md:px-5 md:py-6"
 					onClick={(e) => e.stopPropagation()}
 				>
-					<form>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							submitForm();
+						}}
+					>
 						<input
 							type="text"
 							name="title"
 							id="title"
-							className="w-full rounded-xl h-14 px-3 sm:px-4 md:px-5 text-md tracking-wide border font-heading font-bold border-slate-400 focus:outline-indigo-400 mb-3 text-center placeholder-shown:font-text placeholder-shown:font-semibold"
+							className="w-full rounded-xl h-14 px-3 sm:px-4 md:px-5 text-md tracking-wide border font-heading font-bold border-slate-400 focus:border-indigo-400 focus:outline focus:outline-1 focus:outline-indigo-400 mb-3 text-center placeholder-shown:font-text placeholder-shown:font-semibold "
 							placeholder="Type your title here"
 						/>
 						<div className="flex gap-3 mb-3">
@@ -87,19 +105,59 @@ function AdminPage() {
 								hidden
 							/>
 						</div>
-						<textarea
-							name="textpost"
-							id="textpost"
-							rows="10"
-							className="w-full border border-slate-400 focus:outline-indigo-400 rounded-xl px-3 py-2 sm:px-4 sm:py-3 mb-2"
-							placeholder="Type your blog text post here. Post preview will be cut from your first 80 characters in here."
-							style={{ resize: 'vertical' }}
-						/>
-						<div className="flex justify-end gap-2">
+						<div
+							id="editor-container"
+							className={`border rounded-xl overflow-hidden ${
+								isEditorFocus
+									? 'border-indigo-400 outline outline-1 outline-indigo-400'
+									: 'border-slate-400'
+							}`}
+						>
+							<Editor
+								apiKey="ofbohmy5kj2x83n3n1iw4f9xdcfchxkb8k6vpv3ogxwk97bv"
+								tinymceScriptSrc={'/tinymce/tinymce.min.js'}
+								onInit={(evt, editor) => (editorRef.current = editor)}
+								initialValue="<p>Type your blog text post here. Post preview will be cut from your first 80 characters in here.</p>"
+								init={{
+									height: 350,
+									menubar: false,
+									plugins: [
+										'advlist',
+										'autolink',
+										'lists',
+										'link',
+										'image',
+										'charmap',
+										'anchor',
+										'searchreplace',
+										'visualblocks',
+										'code',
+										'fullscreen',
+										'insertdatetime',
+										'media',
+										'table',
+										'preview',
+										'help',
+										'wordcount',
+									],
+									toolbar:
+										'undo redo | blocks | ' +
+										'bold italic forecolor | alignleft aligncenter ' +
+										'alignright alignjustify | bullist numlist outdent indent | ' +
+										'removeformat | help',
+									content_style:
+										"body { font-family:'Source Sans Pro', 'Arial', 'sans-serif'; font-size:16px } " +
+										"h1, h1, h3, h4, h5, h6 { font-family:'Oxygen', 'Helvetica', 'sans-serif'}",
+								}}
+								onFocus={() => setIsEditorFocus(true)}
+								onBlur={()=> setIsEditorFocus(false)}
+							/>
+						</div>
+
+						<div className="flex justify-end gap-2 mt-2">
 							<button
 								type="submit"
 								className="bg-button-green hover:bg-green-500 active:bg-green-500 hover:text-white active:text-white p-1 w-[5rem] font-semibold rounded-2xl border border-emerald-400"
-								onClick={handleModal}
 							>
 								Save
 							</button>
